@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Tile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://res/Tile Button.png" type="Texture" id=3]
+[ext_resource path="res://res/Swansea.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://res/Minefield Title.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -1354, 151 )
+
+[node name="Tile" parent="." instance=ExtResource( 1 )]
+
+[node name="Game" parent="." instance=ExtResource( 2 )]
+
+[node name="Menu" type="ColorRect" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
+color = Color( 0.133333, 0.0901961, 0.054902, 1 )
+
+[node name="Title" type="TextureRect" parent="Menu"]
+margin_left = 40.0
+margin_top = 150.0
+margin_right = 1040.0
+margin_bottom = 1150.0
+texture = ExtResource( 5 )
+
+[node name="SmallBtn" type="TextureButton" parent="Menu"]
+margin_left = 348.0
+margin_top = 1200.0
+margin_right = 540.0
+margin_bottom = 1264.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Menu/SmallBtn"]
+margin_right = 192.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 1 )
+text = "SMALL"
+align = 1
+valign = 1
+
+[node name="MediumBtn" type="TextureButton" parent="Menu"]
+margin_left = 348.0
+margin_top = 1328.0
+margin_right = 540.0
+margin_bottom = 1392.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Menu/MediumBtn"]
+margin_right = 192.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 1 )
+text = "MEDIUM"
+align = 1
+valign = 1
+
+[node name="LargeBtn" type="TextureButton" parent="Menu"]
+margin_left = 348.0
+margin_top = 1456.0
+margin_right = 540.0
+margin_bottom = 1520.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Menu/LargeBtn"]
+margin_right = 192.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 1 )
+text = "LARGE"
+align = 1
+valign = 1
+
+[node name="QuitBtn" type="TextureButton" parent="Menu"]
+margin_left = 348.0
+margin_top = 1584.0
+margin_right = 540.0
+margin_bottom = 1648.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Menu/QuitBtn"]
+margin_right = 192.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 1 )
+text = "QUIT"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="Menu/SmallBtn" to="Game" method="_on_SmallBtn_pressed"]
+[connection signal="pressed" from="Menu/MediumBtn" to="Game" method="_on_MediumBtn_pressed"]
+[connection signal="pressed" from="Menu/LargeBtn" to="Game" method="_on_LargeBtn_pressed"]
+[connection signal="pressed" from="Menu/QuitBtn" to="Game" method="_on_QuitBtn_pressed"]

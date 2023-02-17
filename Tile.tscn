@@ -1,0 +1,105 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://res/Swansea.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://res/Mine.png" type="Texture" id=2]
+[ext_resource path="res://res/Flag.png" type="Texture" id=3]
+[ext_resource path="res://res/Cover.png" type="Texture" id=4]
+[ext_resource path="res://res/Hole.png" type="Texture" id=5]
+[ext_resource path="res://res/Unknown.png" type="Texture" id=6]
+[ext_resource path="res://Tile.gd" type="Script" id=7]
+[ext_resource path="res://res/Mine Explosion Sheet.png" type="Texture" id=8]
+[ext_resource path="res://res/Exploded Hole.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "explosion",
+"speed": 12.0
+} ]
+
+[node name="Tile" type="Control"]
+script = ExtResource( 7 )
+
+[node name="Hole" type="Sprite" parent="."]
+position = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+
+[node name="Number" type="Label" parent="Hole"]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="Mine" type="Sprite" parent="Hole"]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="Cover" type="Sprite" parent="."]
+position = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+
+[node name="Flag" type="Sprite" parent="Cover"]
+visible = false
+texture = ExtResource( 3 )
+
+[node name="Unknown" type="Sprite" parent="Cover"]
+visible = false
+texture = ExtResource( 6 )
+
+[node name="Explosion" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 8 )
+animation = "explosion"
+offset = Vector2( 32, 32 )
+
+[node name="Exploded" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 9 )
+offset = Vector2( 32, 32 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_Explosion_animation_finished"]
+[connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]

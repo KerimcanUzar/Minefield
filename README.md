@@ -1,5 +1,5 @@
 # Minefield
-  A Minesweeper clone for Android
+  	A Minesweeper clone for Android
 
 ### DESCRIPTION
 	A Minesweeper clone for Android. Made with Godot Engine (v3.5) by using GDScript.
